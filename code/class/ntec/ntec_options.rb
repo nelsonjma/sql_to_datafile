@@ -14,6 +14,35 @@ class NtecOptions
     self.process
   end
 
+  #################### PRIVATE ####################
+  # remove \n\r \n \t
+  def remove_unwanted_chars(data)
+
+    data = data.gsub("\r\n", ' ')
+    data = data.gsub("\t", ' ')
+    data = data.gsub("\n", ' ')
+
+    data.strip
+  end
+
+  # option list [A], [b], [C]
+  def process_item_list(item)
+    aux_item = item.strip
+
+    # remove start [
+    if aux_item.start_with?('[')
+      aux_item = aux_item[1..aux_item.length]
+    end
+
+    # remove end ]
+    if aux_item.end_with?(']')
+      aux_item = aux_item[0..aux_item.length-2]
+    end
+
+    aux_item
+  end
+
+  ################## PUBLIC ##################
   # transform the string in ntec options array
   def process
     aux_option = remove_unwanted_chars(@_option)
@@ -77,34 +106,6 @@ class NtecOptions
     end
 
     []
-  end
-
-  #################### PRIVATE ####################
-  # remove \n\r \n \t
-  def remove_unwanted_chars(data)
-
-    data = data.gsub("\r\n", ' ')
-    data = data.gsub("\t", ' ')
-    data = data.gsub("\n", ' ')
-
-    data.strip
-  end
-
-  # option list [A], [b], [C]
-  def process_item_list(item)
-    aux_item = item.strip
-
-    # remove start [
-    if aux_item.start_with?('[')
-      aux_item = aux_item[1..aux_item.length]
-    end
-
-    # remove end ]
-    if aux_item.end_with?(']')
-      aux_item = aux_item[0..aux_item.length-2]
-    end
-
-    aux_item
   end
 
   private :remove_unwanted_chars, :process_item_list

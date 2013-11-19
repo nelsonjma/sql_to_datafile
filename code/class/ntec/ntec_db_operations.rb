@@ -89,7 +89,12 @@ class NtecConfigOptions
         ntec_op.conn = op_decoded.get_all('conn')
 
         # add ntec to option list
-        @options.push(ntec_op)
+
+        if ntec_op.datafile != '' &&
+            ntec_op.sql.count > 0 &&
+            ntec_op.conn.count > 0
+          @options.push(ntec_op)
+        end
 
       rescue Exception => e
         # destroy the connection
