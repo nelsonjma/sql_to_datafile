@@ -45,46 +45,50 @@ class NtecOptions
   ################## PUBLIC ##################
   # transform the string in ntec options array
   def process
-    aux_option = remove_unwanted_chars(@_option)
+    begin
+      aux_option = remove_unwanted_chars(@_option)
 
-    # unprocessed option list
-    option_list = aux_option.split(%r{\*/|\];})
+      # unprocessed option list
+      option_list = aux_option.split(%r{\*/|\];})
 
-    option_list.each do |op|
-      begin
-        if op.to_s.index('=[') != nil
-          ntec_option = NtecOption.new
-          ntec_option.options = []
+      option_list.each do |op|
+        begin
+          if op.to_s.index('=[') != nil
+            ntec_option = NtecOption.new
+            ntec_option.options = []
 
-          # get option name
-          ntec_option.name = op[0..op.index('=[')-1].strip
+            # get option name
+            ntec_option.name = op[0..op.index('=[')-1].strip
 
-          # get unprocessed option
-          unprocessed_option = op[op.index('=[')+2..op.length]
+            # get unprocessed option
+            unprocessed_option = op[op.index('=[')+2..op.length]
 
-          # process option
-          if (unprocessed_option.to_s.index('],')) == nil
-            ntec_option.options.push(unprocessed_option.strip) # return just one item...
-          else
-            # split option list [A], [b], [C]
-            option_items =  unprocessed_option.split(%r{\],})
+            # process option
+            if (unprocessed_option.to_s.index('],')) == nil
+              ntec_option.options.push(unprocessed_option.strip) # return just one item...
+            else
+              # split option list [A], [b], [C]
+              option_items =  unprocessed_option.split(%r{\],})
 
-            option_items.each do |item|
-              aux_item = item.strip
+              option_items.each do |item|
+                aux_item = item.strip
 
-              if aux_item != ''
-                processed_item = process_item_list(aux_item)
-                ntec_option.options.push(processed_item)
+                if aux_item != ''
+                  processed_item = process_item_list(aux_item)
+                  ntec_option.options.push(processed_item)
+                end
               end
             end
+            @ntec_option_list.push(ntec_option)
           end
-          @ntec_option_list.push(ntec_option)
-        end
 
-      rescue Exception => e
-        puts 'Error processing option: ' + e.message
+        rescue Exception => e
+          puts 'Error processing option: ' + e.message
+        end
       end
 
+    rescue Exception => e
+      throw 'Error processing options: ' + e.message
     end
   end
 

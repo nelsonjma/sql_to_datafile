@@ -1,13 +1,18 @@
-load 'class/read_xml.rb'
+load 'class/xml/read_xml.rb'
 load 'class/ntec/ntec_db_operations.rb'
-load 'class/insert_to_sqlite.rb'
+load 'class/database/write_to_sqlite.rb'
 
-#xml = ReadXml.new('config.xml')
-#puts xml.first_element('//config/path')
-#xml.dispose
+# read xml configs
+xml = ReadXml.new('config.xml')
+db_path = xml.first_element('//config/db_path')
+schedule_time = xml.first_element('//config/schedule_time')
+default_datafile_folder = xml.first_element('//config/default_datafile_folder')
+parallel_threads =  xml.first_element('//config/parallel_queries')
+xml.dispose
 
 
-# xml config
+
+
 # database path
 # schedule interval
 # default xml folder

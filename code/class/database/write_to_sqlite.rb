@@ -1,8 +1,8 @@
 require 'rubygems'
 require 'sqlite3'
 
-class InsertToSqlite
-  attr_accessor :db, :table_name, :columns, :rows
+class WriteToSqlite
+  attr_accessor :db, :table_name, :columns, :rows, :insert_header
 
   def initialize(db_path, table_name, columns, rows)
     @db = nil
@@ -18,7 +18,7 @@ class InsertToSqlite
     begin
       @db = SQLite3::Database.open path
     rescue Exception => e
-      puts 'error connection to database: ' + e.message
+      throw 'error connection to database: ' + e.message
     end
   end
 
@@ -45,25 +45,20 @@ class InsertToSqlite
   end
 
   def build_insert_script(row)
-    insert_to_tb = 'INSERT INTO ' + @table_name + ' ('
-
-    a = 0
-    @columns.each do |field|
-      insert_to_tb += ',' if a > 0
-      begin
-        insert_to_tb += field.name
-      rescue
-        insert_to_tb += field
-      end
-      a = a + 1
-    end
-
-    insert_to_tb += ') VALUES ('
+    insert_to_tb = 'INSERT INTO ' + @table_name + ' (' + @insert_header + ') VALUES ('
 
     c = 0
     row.each do |cell|
+      value = cell
+
+      begin
+        if cell.count == 2
+          value = cell[1]
+        end
+      end
+
       insert_to_tb += ',' if c > 0
-      insert_to_tb +=  "'"  + (cell.to_s.index("'") != nil ? cell.to_s.gsub("'", ' ') : cell.to_s) + "'"
+      insert_to_tb +=  "'"  + (value.to_s.index("'") != nil ? value.to_s.gsub("'", ' ') : value.to_s) + "'"
 
       c = c + 1
     end
@@ -96,7 +91,35 @@ class InsertToSqlite
     return table_script
   end
 
+  def build_insert_header
+    @insert_header = ''
+
+    a = 0
+    @columns.each do |field|
+      @insert_header += ',' if a > 0
+      begin
+        @insert_header += field.name
+      rescue
+        @insert_header += field
+      end
+      a = a + 1
+    end
+
+  end
+
   ################## PUBLIC ##################
+  def clean_data
+    if @db == nil
+      return -1
+    end
+
+    begin
+      @db.execute 'DELETE FROM ' + @table_name
+    rescue Exception => e
+      throw e.message
+    end
+  end
+
   def create_table
     if @db == nil
       return -1
@@ -105,7 +128,7 @@ class InsertToSqlite
     begin
       @db.execute build_create_table_script(@columns)
     rescue Exception => e
-      puts e.message
+      throw e.message
     end
   end
 
@@ -117,7 +140,7 @@ class InsertToSqlite
     begin
       @db.execute 'DROP TABLE ' + @table_name
     rescue Exception => e
-      puts e.message
+      throw e.message
     end
   end
 
@@ -125,6 +148,8 @@ class InsertToSqlite
     begin
       commit_rows = set_transaction_interval(@rows.count)
       transaction_count = 0
+
+      build_insert_header
 
       @rows.each do |row|
         begin
@@ -137,8 +162,10 @@ class InsertToSqlite
           puts 'error doing insert: ' + e.message
         end
       end
+
+      @db.commit if @db.transaction_active?
     rescue Exception => e
-      puts 'error writing data to table  ' + e.message
+      throw 'error writing data to table  ' + e.message
     end
   end
 
@@ -146,8 +173,8 @@ class InsertToSqlite
           :set_transaction_interval,
           :check_transaction_status,
           :build_insert_script,
-          :build_create_table_script
-
+          :build_create_table_script,
+          :build_insert_header
 end
 
 

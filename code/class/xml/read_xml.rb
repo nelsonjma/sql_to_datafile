@@ -31,7 +31,7 @@ class ReadXml
       @document = Nokogiri::XML(file)
       file.close
     rescue Exception => e
-      puts e.message
+      throw e.message
     end
   end
 
