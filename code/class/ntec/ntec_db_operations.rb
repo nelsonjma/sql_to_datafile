@@ -8,13 +8,13 @@ class NtecConfigOption
   # sql => [], conn => []
   # normaly datafile = datatable but if sql contains more than one query then
   # it will be one datatable for one sql => datatable_name => []
-  attr_accessor :page, :xml_folder_path, :frame,
+  attr_accessor :page, :folder_path, :frame,
                 :sql, :conn, :datafile, :datatable,
                 :clean_data, :drop_table
 
   def initialize
     @page = nil
-    @xml_folder_path = nil
+    @folder_path = nil
     @frame = nil
     @sql = []
     @conn =  []
@@ -79,7 +79,7 @@ class NtecConfigOptions
 
           ntec_op.page = r['name']
           ntec_op.frame = r['title']
-          ntec_op.xml_folder_path = r['xml_folder_path']
+          ntec_op.folder_path = r['xml_folder_path']
 
           # inicialize ntec option decoder
           op_decoded = NtecOptions.new(r['options'])

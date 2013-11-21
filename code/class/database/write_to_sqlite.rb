@@ -4,9 +4,8 @@ require 'sqlite3'
 class WriteToSqlite
   attr_accessor :db, :table_name, :columns, :rows, :insert_header
 
-  def initialize(db_path, table_name, columns, rows)
+  def initialize(db_path, columns, rows)
     @db = nil
-    @table_name = table_name
     @columns = columns
     @rows = rows
 
@@ -138,7 +137,7 @@ class WriteToSqlite
     end
 
     begin
-      @db.execute 'DROP TABLE ' + @table_name
+      @db.execute 'DROP TABLE IF EXISTS ' + @table_name
     rescue Exception => e
       throw e.message
     end
@@ -166,6 +165,30 @@ class WriteToSqlite
       @db.commit if @db.transaction_active?
     rescue Exception => e
       throw 'error writing data to table  ' + e.message
+    end
+  end
+
+  def change_name(old, new)
+    if @db == nil
+      return -1
+    end
+
+    begin
+      @db.execute 'ALTER TABLE ' + old + ' RENAME TO ' + new
+    rescue Exception => e
+      throw e.message
+    end
+  end
+
+  def copy_table_structure(original, copy)
+    if @db == nil
+      return -1
+    end
+
+    begin
+      @db.execute 'CREATE TABLE ' + copy + ' AS SELECT * FROM ' + original + ' WHERE 0'
+    rescue Exception => e
+      throw e.message
     end
   end
 
