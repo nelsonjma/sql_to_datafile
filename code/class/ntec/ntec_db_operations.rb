@@ -86,8 +86,8 @@ class NtecConfigOptions
 
           ntec_op.clean_data = op_decoded.get_first('clean_data')
           ntec_op.drop_table = op_decoded.get_first('drop_table')
-          ntec_op.datafile = op_decoded.get_first('data_file')
-          ntec_op.datatable = op_decoded.get_all('data_table')
+          ntec_op.datafile = op_decoded.get_first('datafile')
+          ntec_op.datatable = op_decoded.get_all('datatable')
           ntec_op.sql = op_decoded.get_all('sql')
           ntec_op.conn = op_decoded.get_all('conn')
 

@@ -27,19 +27,69 @@ class StoreData
   end
 
   ################### PUBLIC ###################
+  def options_execution
+
+    # get information from config file
+    @db_path = 'C:\Users\xyon\Desktop\GitHub\sql_to_datafile\code\class\configs.db'
+    @schedule_time = '30'
+    @default_datafile_folder = 'C:\Users\xyon\Desktop\GitHub\sql_to_datafile\code\class'
+    #@parallel_threads =  xml.first_element('//config/parallel_queries')
+
+    # get ntec options
+    get_ntec_options
+
+    # process options
+    @options.each do |option|
+      option_execution(option)
+    end
+
+    puts 'end run...'
+  end
 
   ################### PRIVATE ###################
-  def option_execution(conn, sql, datatable, datafile, clean_data, drop_table, folder_path)
+  # process one option
+  def option_execution(option)
     begin
-      data = run_query(conn, sql)
+      page = option.page
+      folder_path = option.folder_path
+      frame = option.frame
+      sql = option.sql
+      conn = option.conn
+      datafile = option.datafile
+      datatable = option.datatable
+      clean_data = option.clean_data
+      drop_table = option.drop_table
 
-      write_to_datafile(data, datafile, datatable, clean_data, drop_table, folder_path)
+      if sql.count > 0 && sql.count == datatable.count && (conn.count == sql.count || conn.count == 1)
+
+        (0..sql.count-1).each { |i|
+
+          aux_sql = sql[i]
+          aux_conn = conn.count == 1 ? conn[0] : conn[i]
+          aux_datatable = datatable[i]
+
+          process_option(aux_conn, aux_sql, aux_datatable, datafile, clean_data, drop_table, folder_path)
+        }
+      end
 
     rescue Exception => e
       puts e.message
     end
   end
 
+  # run query and then write data to datafile
+  def process_option(conn, sql, datatable, datafile, clean_data, drop_table, folder_path)
+    begin
+      data = run_query(conn, sql)
+
+      write_to_datafile(data, datatable, datafile, clean_data, drop_table, folder_path)
+
+    rescue Exception => e
+      puts e.message
+    end
+  end
+
+  # get ntec information from config database
   def get_ntec_options
     begin
       ntec_op = NtecConfigOptions.new(@db_path, @schedule_time)
@@ -150,7 +200,7 @@ class StoreData
 
   def build_datafile_path(folder_path, datafile)
 
-    folder_path = @default_datafile_folder if folder_path == '' && folder_path.to_s.downcase == 'default'
+    folder_path = @default_datafile_folder if folder_path.to_s.strip == '' || folder_path.to_s.strip.downcase == 'default'
 
     folder_path.to_s.strip.end_with?('\\') ? folder_path.strip + datafile : folder_path.strip + '\\' + datafile
   end
@@ -160,19 +210,12 @@ class StoreData
           :write_to_datafile,
           :run_query,
           :read_config_file,
-          :get_ntec_options
-          #:option_execution
+          :get_ntec_options,
+          :process_option,
+          :option_execution
 end
 
 
 
 store = StoreData.new('')
-
-store.option_execution('Data Source=configs.db;Version=3;',
-                      'select 10 as nelson, 12 as cenas',
-                      'demo_nelson',
-                      'demo_nelson',
-                      '',
-                      'true',
-                      'C:\Users\xyon\Desktop\GitHub\sql_to_datafile\code')
-
+store.options_execution
