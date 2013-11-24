@@ -1,7 +1,7 @@
 require 'rubygems'
 require 'win32ole'
 
-load 'database/datatable.rb'
+load 'class/database/datatable.rb'
 
 class ConnectToOleDb
   attr_accessor :conn

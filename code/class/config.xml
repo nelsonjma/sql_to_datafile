@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<config>
-	<db_path>C:\Users\xyon\Desktop\GitHub\sql_to_datafile\code\class\configs.db</db_path>
-	<schedule_time>30</schedule_time>
-	<default_datafile_folder>C:\Users\xyon\Desktop\GitHub\sql_to_datafile\code\class</default_datafile_folder>
-	<parallel_queries>2</parallel_queries>
-</config>

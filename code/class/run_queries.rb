@@ -2,17 +2,17 @@ require 'rubygems'
 require 'thread'
 
 # get ntec configs
-load 'ntec/ntec_db_operations.rb'
+load 'class/ntec/ntec_db_operations.rb'
 # database connection
-load 'database/datatable.rb'
-load 'database/connect_to_oledb.rb'
-load 'database/connect_to_sqlite.rb'
+load 'class/database/datatable.rb'
+load 'class/database/connect_to_oledb.rb'
+load 'class/database/connect_to_sqlite.rb'
 # datafile write
-load 'database/write_to_sqlite.rb'
+load 'class/database/write_to_sqlite.rb'
 # read xml files
-load 'xml/read_xml.rb'
+load 'class/xml/read_xml.rb'
 # logging
-load 'log/logme.rb'
+load 'class/log/logme.rb'
 
 class StoreData
   attr_accessor :db_path, :schedule_time, :default_datafile_folder, :parallel_threads,
@@ -81,7 +81,7 @@ class StoreData
 
       puts 'end run...'
     rescue Exception => e
-      puts e.message
+      puts 'generic error: ' + e.message.to_s.gsub('uncaught throw', '').gsub('\"', '').gsub('\\\\', '\\')
     end
   end
 
@@ -124,7 +124,7 @@ class StoreData
         logging_show_report
       end
     rescue Exception => e
-      puts e.message
+      puts 'thread management error: ' + e.message.to_s.gsub('uncaught throw', '').gsub('\"', '').gsub('\\', '')
     end
 
     return ths, thread_count
@@ -315,8 +315,3 @@ class StoreData
           :logging_show_report,
           :logging_store_msg
 end
-
-
-
-store = StoreData.new('C:\Users\xyon\Desktop\GitHub\sql_to_datafile\code\class\config.xml')
-store.options_execution
