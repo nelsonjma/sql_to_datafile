@@ -1,4 +1,5 @@
 require 'rubygems'
+require 'thread'
 
 # get ntec configs
 load 'ntec/ntec_db_operations.rb'
@@ -10,10 +11,12 @@ load 'database/connect_to_sqlite.rb'
 load 'database/write_to_sqlite.rb'
 # read xml files
 load 'xml/read_xml.rb'
+# logging
+load 'log/logme.rb'
 
 class StoreData
   attr_accessor :db_path, :schedule_time, :default_datafile_folder, :parallel_threads,
-                :config_file_path, :options
+                :config_file_path, :options, :thread_semaphore, :log
 
   def initialize(config_file_path)
     @config_file_path = config_file_path
@@ -22,33 +25,115 @@ class StoreData
     @schedule_time = nil
     @default_datafile_folder = nil
     @parallel_threads = nil
+    @thread_semaphore = nil
+    @log = nil
 
     @options = []
   end
 
   ################### PUBLIC ###################
   def options_execution
+    begin
+      # get information from config file
+      read_config_file
 
-    # get information from config file
-    @db_path = 'C:\Users\xyon\Desktop\GitHub\sql_to_datafile\code\class\configs.db'
-    @schedule_time = '30'
-    @default_datafile_folder = 'C:\Users\xyon\Desktop\GitHub\sql_to_datafile\code\class'
-    #@parallel_threads =  xml.first_element('//config/parallel_queries')
+      # get ntec options
+      get_ntec_options
 
-    # get ntec options
-    get_ntec_options
+      # thread initialize
+      ths = []
+      thread_count = 0;
 
-    # process options
-    @options.each do |option|
-      option_execution(option)
+      @thread_semaphore = Mutex.new
+      ###################
+
+      # logging
+      @log = LogMe.new
+
+      @options.each do |option|
+        index = @log.add_item(option.page, option.frame)
+        @log.add_output_msg_by_index(index, 'waiting: ' + Time.now.strftime('%H:%M:%S'))
+      end
+      ###################
+
+      # process options
+      @options.each do |option|
+
+        thread_count += + 1
+
+        th = Thread.new{ option_execution(option) }
+
+        # wait for the thread to start
+        until th.alive?
+          sleep 0.1
+        end
+
+        ths.push(th)
+
+        ths, thread_count = thread_wait_management(ths, thread_count)
+      end
+
+      # dont want to have no more threads active
+      @parallel_threads = 0
+
+      # launtch last thread manager execution
+      thread_wait_management(ths, thread_count)
+
+      puts 'end run...'
+    rescue Exception => e
+      puts e.message
     end
-
-    puts 'end run...'
   end
 
   ################### PRIVATE ###################
+
+  # show console information about the thread status
+  def logging_show_report
+    @thread_semaphore.synchronize {
+      if @log != nil
+        @log.show_report
+      end
+    }
+
+  end
+
+  def logging_store_msg(page, frame, msg)
+      @thread_semaphore.synchronize {
+        if @log != nil
+          @log.add_output_msg_by_name(page, frame, msg + ' ' + Time.now.strftime('%H:%M:%S'))
+        end
+      }
+  end
+
+  # controls the thread waiting
+  def thread_wait_management(ths, thread_count)
+    begin
+      while thread_count > @parallel_threads
+
+        # check if all threads are alive
+        (0..ths.count-1).each do |i|
+          if ths[i] != nil && !ths[i].alive?
+            ths[i] = nil
+            thread_count += -1
+          end
+        end
+
+        sleep 0.5
+
+        # show data to console
+        logging_show_report
+      end
+    rescue Exception => e
+      puts e.message
+    end
+
+    return ths, thread_count
+  end
+
   # process one option
   def option_execution(option)
+    page = nil
+    frame = nil
     begin
       page = option.page
       folder_path = option.folder_path
@@ -60,32 +145,45 @@ class StoreData
       clean_data = option.clean_data
       drop_table = option.drop_table
 
-      if sql.count > 0 && sql.count == datatable.count && (conn.count == sql.count || conn.count == 1)
+      # log starting
+      logging_store_msg(page, frame, 'starting')
 
+      if sql.count > 0 && sql.count == datatable.count && (conn.count == sql.count || conn.count == 1)
         (0..sql.count-1).each { |i|
 
           aux_sql = sql[i]
           aux_conn = conn.count == 1 ? conn[0] : conn[i]
           aux_datatable = datatable[i]
 
-          process_option(aux_conn, aux_sql, aux_datatable, datafile, clean_data, drop_table, folder_path)
+          process_option(page, frame, aux_conn, aux_sql, aux_datatable, datafile, clean_data, drop_table, folder_path)
         }
       end
 
     rescue Exception => e
-      puts e.message
+      # log error
+      logging_store_msg(page, frame, e.message.to_s.gsub('uncaught throw', '').gsub('\"', '').gsub('\\', ''))
     end
   end
 
   # run query and then write data to datafile
-  def process_option(conn, sql, datatable, datafile, clean_data, drop_table, folder_path)
+  def process_option(page, frame, conn, sql, datatable, datafile, clean_data, drop_table, folder_path)
     begin
+      # log query start
+      logging_store_msg(page, frame, 'query running:')
+
       data = run_query(conn, sql)
+
+      # log write to datafile
+      logging_store_msg(page, frame, 'write to datafile:')
 
       write_to_datafile(data, datatable, datafile, clean_data, drop_table, folder_path)
 
+
+      # log write to datafile
+      logging_store_msg(page, frame, 'end:')
+
     rescue Exception => e
-      puts e.message
+      throw e.message
     end
   end
 
@@ -104,10 +202,10 @@ class StoreData
     begin
       xml = ReadXml.new(@config_file_path)
 
-      @db_path = xml.first_element('//config/db_path')
-      @schedule_time = xml.first_element('//config/schedule_time')
-      @default_datafile_folder = xml.first_element('//config/default_datafile_folder')
-      @parallel_threads =  xml.first_element('//config/parallel_queries')
+      @db_path = xml.first_element('//config/db_path').to_s.strip
+      @schedule_time = xml.first_element('//config/schedule_time').to_s.strip
+      @default_datafile_folder = xml.first_element('//config/default_datafile_folder').to_s.strip
+      @parallel_threads =  xml.first_element('//config/parallel_queries').to_s.strip.to_i
 
     rescue Exception => e
       throw 'error reading xml config: ' + e.message
@@ -134,7 +232,7 @@ class StoreData
 
       return dt.get_data(sql)
     rescue Exception => e
-      throw 'error running query: ' + e.message
+      throw 'query: ' + e.message
     ensure
       dt.close if dt != nil
     end
@@ -179,7 +277,7 @@ class StoreData
         write.change_name(datatable + '_tmp', datatable)
       end
     rescue Exception => e
-      throw 'error writing to datafile: ' + e.message
+      throw 'writing: ' + e.message
     end
   end
 
@@ -212,10 +310,13 @@ class StoreData
           :read_config_file,
           :get_ntec_options,
           :process_option,
-          :option_execution
+          :option_execution,
+          :thread_wait_management,
+          :logging_show_report,
+          :logging_store_msg
 end
 
 
 
-store = StoreData.new('')
+store = StoreData.new('C:\Users\xyon\Desktop\GitHub\sql_to_datafile\code\class\config.xml')
 store.options_execution

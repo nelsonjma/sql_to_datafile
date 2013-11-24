@@ -16,7 +16,7 @@ class ConnectToSqlite
       @conn.results_as_hash = true
     rescue Exception => e
       @conn = nil
-      throw 'error connecting to database: ' + e.message
+      throw 'connecting: ' + e.message
     end
   end
 
@@ -24,7 +24,7 @@ class ConnectToSqlite
     begin
       @conn = nil
     rescue Exception => e
-      throw 'error closing connection: ' + e.message
+      throw 'closing: ' + e.message
     end
   end
 
@@ -44,7 +44,7 @@ class ConnectToSqlite
 
       return dt
     rescue Exception => e
-      throw 'error running query:' + e.message
+      throw 'running: ' + e.message
     end
   end
 

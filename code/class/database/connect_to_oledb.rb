@@ -16,7 +16,7 @@ class ConnectToOleDb
       @conn.Open(conn_str)
     rescue Exception => e
       @conn = nil
-      throw 'error connecting to database: ' + e.message
+      throw 'connecting: ' + e.message
     end
   end
 
@@ -24,7 +24,7 @@ class ConnectToOleDb
     begin
       @conn.Close if @conn != nil
     rescue Exception => e
-      throw 'error closing connection: ' + e.message
+      throw 'closing: ' + e.message
     end
   end
 
@@ -45,7 +45,7 @@ class ConnectToOleDb
 
       return dt
     rescue Exception => e
-      throw 'error running query:' + e.message
+      throw 'running:' + e.message
     end
   end
 

@@ -2,24 +2,31 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="97e6e8be-dd8c-4152-86c3-68a4e0f543dd" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/class/config.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/class/log/logme.rb" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sample/pass_by_reference.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/class/configs.db" afterPath="$PROJECT_DIR$/code/class/configs.db" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/class/ntec/ntec_db_operations.rb" afterPath="$PROJECT_DIR$/code/class/ntec/ntec_db_operations.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/class/database/connect_to_oledb.rb" afterPath="$PROJECT_DIR$/code/class/database/connect_to_oledb.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/class/database/connect_to_sqlite.rb" afterPath="$PROJECT_DIR$/code/class/database/connect_to_sqlite.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/class/run_queries.rb" afterPath="$PROJECT_DIR$/code/class/run_queries.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="sql_to_datafile.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="97e6e8be-dd8c-4152-86c3-68a4e0f543dd" time="1385074315165" ignored="false" />
+    <file path="/Dummy.txt" changelist="97e6e8be-dd8c-4152-86c3-68a4e0f543dd" time="1385217084408" ignored="false" />
     <file path="/ntec_db_operations.rb" changelist="97e6e8be-dd8c-4152-86c3-68a4e0f543dd" time="1384905193839" ignored="false" />
     <file path="/sql_to_datafile.rb" changelist="97e6e8be-dd8c-4152-86c3-68a4e0f543dd" time="1384905000071" ignored="false" />
     <file path="/insert_to_sqlite.rb" changelist="97e6e8be-dd8c-4152-86c3-68a4e0f543dd" time="1384904809234" ignored="false" />
     <file path="/ntec_options.rb" changelist="97e6e8be-dd8c-4152-86c3-68a4e0f543dd" time="1384904005088" ignored="false" />
     <file path="/datatable.rb" changelist="97e6e8be-dd8c-4152-86c3-68a4e0f543dd" time="1384892301824" ignored="false" />
-    <file path="/run_queries.rb" changelist="97e6e8be-dd8c-4152-86c3-68a4e0f543dd" time="1385078577011" ignored="false" />
+    <file path="/run_queries.rb" changelist="97e6e8be-dd8c-4152-86c3-68a4e0f543dd" time="1385264063116" ignored="false" />
     <file path="/read_xml.rb" changelist="97e6e8be-dd8c-4152-86c3-68a4e0f543dd" time="1384904070966" ignored="false" />
     <file path="/connect_to_oledb.rb" changelist="97e6e8be-dd8c-4152-86c3-68a4e0f543dd" time="1384908921187" ignored="false" />
     <file path="/temp.rb" changelist="97e6e8be-dd8c-4152-86c3-68a4e0f543dd" time="1384904835221" ignored="false" />
     <file path="/write_to_sqlite.rb" changelist="97e6e8be-dd8c-4152-86c3-68a4e0f543dd" time="1384990254674" ignored="false" />
-    <file path="/connect_to_sqlite.rb" changelist="97e6e8be-dd8c-4152-86c3-68a4e0f543dd" time="1384909176749" ignored="false" />
+    <file path="/connect_to_sqlite.rb" changelist="97e6e8be-dd8c-4152-86c3-68a4e0f543dd" time="1385263315392" ignored="false" />
+    <file path="/pass_by_reference.rb" changelist="97e6e8be-dd8c-4152-86c3-68a4e0f543dd" time="1385227478352" ignored="false" />
+    <file path="/logme.rb" changelist="97e6e8be-dd8c-4152-86c3-68a4e0f543dd" time="1385263881234" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,11 +68,14 @@
         <option value="$PROJECT_DIR$/code/class/ntec/ntec_options.rb" />
         <option value="$PROJECT_DIR$/code/class/xml/read_xml.rb" />
         <option value="$PROJECT_DIR$/code/class/database/insert_to_sqlite.rb" />
-        <option value="$PROJECT_DIR$/code/class/database/connect_to_oledb.rb" />
-        <option value="$PROJECT_DIR$/code/class/database/connect_to_sqlite.rb" />
         <option value="$PROJECT_DIR$/code/sql_to_datafile.rb" />
         <option value="$PROJECT_DIR$/code/class/database/write_to_sqlite.rb" />
         <option value="$PROJECT_DIR$/code/class/ntec/ntec_db_operations.rb" />
+        <option value="$PROJECT_DIR$/code/class/config.xml" />
+        <option value="$PROJECT_DIR$/sample/pass_by_reference.rb" />
+        <option value="$PROJECT_DIR$/code/class/database/connect_to_oledb.rb" />
+        <option value="$PROJECT_DIR$/code/class/database/connect_to_sqlite.rb" />
+        <option value="$PROJECT_DIR$/code/class/log/logme.rb" />
         <option value="$PROJECT_DIR$/code/class/run_queries.rb" />
       </list>
     </option>
@@ -73,8 +83,8 @@
   <component name="ProjectFrameBounds">
     <option name="x" value="-4" />
     <option name="y" value="-4" />
-    <option name="width" value="1928" />
-    <option name="height" value="1152" />
+    <option name="width" value="1448" />
+    <option name="height" value="852" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -118,6 +128,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -186,7 +197,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="ntec" />
+              <option name="myItemId" value="log" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -214,7 +225,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -227,7 +237,7 @@
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder2" value="2" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="304" />
     <property name="recentsLimit" value="5" />
-    <property name="options.lastSelected" value="vcs.Git" />
+    <property name="options.lastSelected" value="project.propVCSSupport.Mappings" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder1" value="1" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
     <property name="last_opened_file_path" value="C:/Program Files/Git/bin/git.exe" />
@@ -253,24 +263,6 @@
     </key>
   </component>
   <component name="RunManager" selected="Ruby.run_queries">
-    <configuration default="false" name="sql_to_datafile" type="RubyRunConfigurationType" factoryName="Ruby" temporary="true">
-      <module name="sql_to_datafile" />
-      <RUBY_RUN_CONFIG NAME="RUBY_ARGS" VALUE="-e $stdout.sync=true;$stderr.sync=true;load($0=ARGV.shift)" />
-      <RUBY_RUN_CONFIG NAME="WORK DIR" VALUE="$PROJECT_DIR$/code" />
-      <RUBY_RUN_CONFIG NAME="SHOULD_USE_SDK" VALUE="false" />
-      <RUBY_RUN_CONFIG NAME="ALTERN_SDK_NAME" VALUE="" />
-      <RUBY_RUN_CONFIG NAME="myPassParentEnvs" VALUE="true" />
-      <envs />
-      <EXTENSION ID="BundlerRunConfigurationExtension" bundleExecEnabled="false" />
-      <EXTENSION ID="JRubyRunConfigurationExtension" />
-      <EXTENSION ID="RubyCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" track_test_folders="true" runner="rcov" />
-      <EXTENSION ID="org.jetbrains.plugins.ruby.motion.run.MotionSimulatorRunExtension" />
-      <RUBY_RUN_CONFIG NAME="SCRIPT_PATH" VALUE="$PROJECT_DIR$/code/sql_to_datafile.rb" />
-      <RUBY_RUN_CONFIG NAME="SCRIPT_ARGS" VALUE="" />
-      <RunnerSettings RunnerId="RubyRunner" />
-      <ConfigurationWrapper RunnerId="RubyRunner" />
-      <method />
-    </configuration>
     <configuration default="false" name="connect_to_oledb" type="RubyRunConfigurationType" factoryName="Ruby" temporary="true">
       <module name="sql_to_datafile" />
       <RUBY_RUN_CONFIG NAME="RUBY_ARGS" VALUE="-e $stdout.sync=true;$stderr.sync=true;load($0=ARGV.shift)" />
@@ -328,6 +320,44 @@
       <RunnerSettings RunnerId="RubyDebugRunner" />
       <RunnerSettings RunnerId="RubyRunner" />
       <ConfigurationWrapper RunnerId="RubyDebugRunner" />
+      <ConfigurationWrapper RunnerId="RubyRunner" />
+      <method />
+    </configuration>
+    <configuration default="false" name="pass_by_reference" type="RubyRunConfigurationType" factoryName="Ruby" temporary="true">
+      <module name="sql_to_datafile" />
+      <RUBY_RUN_CONFIG NAME="RUBY_ARGS" VALUE="-e $stdout.sync=true;$stderr.sync=true;load($0=ARGV.shift)" />
+      <RUBY_RUN_CONFIG NAME="WORK DIR" VALUE="$PROJECT_DIR$/sample" />
+      <RUBY_RUN_CONFIG NAME="SHOULD_USE_SDK" VALUE="false" />
+      <RUBY_RUN_CONFIG NAME="ALTERN_SDK_NAME" VALUE="" />
+      <RUBY_RUN_CONFIG NAME="myPassParentEnvs" VALUE="true" />
+      <envs />
+      <EXTENSION ID="BundlerRunConfigurationExtension" bundleExecEnabled="false" />
+      <EXTENSION ID="JRubyRunConfigurationExtension" />
+      <EXTENSION ID="RubyCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" track_test_folders="true" runner="rcov" />
+      <EXTENSION ID="org.jetbrains.plugins.ruby.motion.run.MotionSimulatorRunExtension" />
+      <RUBY_RUN_CONFIG NAME="SCRIPT_PATH" VALUE="$PROJECT_DIR$/sample/pass_by_reference.rb" />
+      <RUBY_RUN_CONFIG NAME="SCRIPT_ARGS" VALUE="" />
+      <RunnerSettings RunnerId="RubyDebugRunner" />
+      <RunnerSettings RunnerId="RubyRunner" />
+      <ConfigurationWrapper RunnerId="RubyDebugRunner" />
+      <ConfigurationWrapper RunnerId="RubyRunner" />
+      <method />
+    </configuration>
+    <configuration default="false" name="logme" type="RubyRunConfigurationType" factoryName="Ruby" temporary="true">
+      <module name="sql_to_datafile" />
+      <RUBY_RUN_CONFIG NAME="RUBY_ARGS" VALUE="-e $stdout.sync=true;$stderr.sync=true;load($0=ARGV.shift)" />
+      <RUBY_RUN_CONFIG NAME="WORK DIR" VALUE="$PROJECT_DIR$/code/class/log" />
+      <RUBY_RUN_CONFIG NAME="SHOULD_USE_SDK" VALUE="false" />
+      <RUBY_RUN_CONFIG NAME="ALTERN_SDK_NAME" VALUE="" />
+      <RUBY_RUN_CONFIG NAME="myPassParentEnvs" VALUE="true" />
+      <envs />
+      <EXTENSION ID="BundlerRunConfigurationExtension" bundleExecEnabled="false" />
+      <EXTENSION ID="JRubyRunConfigurationExtension" />
+      <EXTENSION ID="RubyCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" track_test_folders="true" runner="rcov" />
+      <EXTENSION ID="org.jetbrains.plugins.ruby.motion.run.MotionSimulatorRunExtension" />
+      <RUBY_RUN_CONFIG NAME="SCRIPT_PATH" VALUE="$PROJECT_DIR$/code/class/log/logme.rb" />
+      <RUBY_RUN_CONFIG NAME="SCRIPT_ARGS" VALUE="" />
+      <RunnerSettings RunnerId="RubyRunner" />
       <ConfigurationWrapper RunnerId="RubyRunner" />
       <method />
     </configuration>
@@ -395,19 +425,20 @@
       <RTEST_RUN_CONFIG_SETTINGS_ID NAME="RUNNER_OPTIONS" VALUE="" />
       <method />
     </configuration>
-    <list size="4">
-      <item index="0" class="java.lang.String" itemvalue="Ruby.sql_to_datafile" />
-      <item index="1" class="java.lang.String" itemvalue="Ruby.connect_to_oledb" />
-      <item index="2" class="java.lang.String" itemvalue="Ruby.run_queries" />
-      <item index="3" class="java.lang.String" itemvalue="Ruby.write_to_sqlite" />
+    <list size="5">
+      <item index="0" class="java.lang.String" itemvalue="Ruby.connect_to_oledb" />
+      <item index="1" class="java.lang.String" itemvalue="Ruby.run_queries" />
+      <item index="2" class="java.lang.String" itemvalue="Ruby.write_to_sqlite" />
+      <item index="3" class="java.lang.String" itemvalue="Ruby.pass_by_reference" />
+      <item index="4" class="java.lang.String" itemvalue="Ruby.logme" />
     </list>
     <recent_temporary>
       <list size="5">
         <item index="0" class="java.lang.String" itemvalue="Ruby.run_queries" />
-        <item index="1" class="java.lang.String" itemvalue="Ruby.write_to_sqlite" />
-        <item index="2" class="java.lang.String" itemvalue="Ruby.connect_to_oledb" />
-        <item index="3" class="java.lang.String" itemvalue="Ruby.sql_to_datafile" />
-        <item index="4" class="java.lang.String" itemvalue="Ruby.write_to_sqlite" />
+        <item index="1" class="java.lang.String" itemvalue="Ruby.logme" />
+        <item index="2" class="java.lang.String" itemvalue="Ruby.pass_by_reference" />
+        <item index="3" class="java.lang.String" itemvalue="Ruby.write_to_sqlite" />
+        <item index="4" class="java.lang.String" itemvalue="Ruby.connect_to_oledb" />
       </list>
     </recent_temporary>
   </component>
@@ -438,23 +469,23 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-4" y="-4" width="1928" height="1152" extended-state="6" />
+    <frame x="-4" y="-4" width="1448" height="852" extended-state="6" />
     <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32841823" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.11354167" sideWeight="0.61290324" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.38709676" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25416666" sideWeight="0.7015915" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.38594165" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.30099857" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.29840848" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.6690442" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32905984" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -519,20 +550,10 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="47" />
+      <option name="time" value="64" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/sample/connect_to_ntec_db/read_ntec_requests_process_options.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="26" selection-start="461" selection-end="461" vertical-scroll-proportion="0.17017017" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sample/read_ntec_options/option_decript.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/sample/write_to_datafile_speed_test/write_speed_test.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="32" column="0" selection-start="847" selection-end="886" vertical-scroll-proportion="0.14237855" />
@@ -553,21 +574,6 @@
         <state line="5" column="31" selection-start="172" selection-end="176" vertical-scroll-proportion="0.19101124" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/code/class/database/connect_to_oledb.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="15" selection-start="68" selection-end="68" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/code/class/ntec/ntec_options.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="60" column="54" selection-start="1267" selection-end="1290" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/code/class/database/connect_to_sqlite.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="14" selection-start="323" selection-end="323" vertical-scroll-proportion="0.12878788" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/code/sql_to_datafile.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="5" column="0" selection-start="130" selection-end="130" vertical-scroll-proportion="0.12592593" />
@@ -575,39 +581,43 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/code/class/database/write_to_sqlite.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="176" column="57" selection-start="3455" selection-end="3455" vertical-scroll-proportion="0.67990077">
-          <folding>
-            <element signature="e#299#463#0" expanded="false" />
-            <element signature="e#467#672#0" expanded="false" />
-            <element signature="e#511#666#2" expanded="false" />
-            <element signature="e#676#956#0" expanded="false" />
-            <element signature="e#741#927#0" expanded="false" />
-            <element signature="e#960#1441#0" expanded="false" />
-            <element signature="e#1445#1833#0" expanded="false" />
-            <element signature="e#1583#1777#0" expanded="false" />
-            <element signature="e#1636#1751#0" expanded="false" />
-            <element signature="e#1837#2096#0" expanded="false" />
-            <element signature="e#2147#2323#0" expanded="false" />
-            <element signature="e#2327#2512#0" expanded="false" />
-            <element signature="e#2516#2701#0" expanded="false" />
-            <element signature="e#2578#2695#0" expanded="false" />
-            <element signature="e#2705#3315#0" expanded="false" />
-            <element signature="e#3524#3767#0" expanded="false" />
-            <element signature="e#3612#3761#0" expanded="false" />
-          </folding>
-        </state>
+        <state line="176" column="57" selection-start="3455" selection-end="3455" vertical-scroll-proportion="0.67990077" />
       </provider>
     </entry>
     <entry file="file://C:/Ruby200/lib/ruby/gems/2.0.0/gems/sqlite3-1.3.8-x86-mingw32/lib/sqlite3/database.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="133" column="0" selection-start="4873" selection-end="4873" vertical-scroll-proportion="0.0">
+        <state line="133" column="0" selection-start="4873" selection-end="4873" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/class/ntec/ntec_options.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="60" column="54" selection-start="1267" selection-end="1290" vertical-scroll-proportion="0.023351649" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/class/config.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="4" selection-start="323" selection-end="323" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/Ruby200/lib/ruby/gems/2.0.0/gems/ruby-debug-ide-0.4.21/lib/ruby-debug-ide.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="86" column="0" selection-start="2049" selection-end="2049" vertical-scroll-proportion="0.45432693">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sample/pass_by_reference.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="21" column="30" selection-start="135" selection-end="135" vertical-scroll-proportion="0.8321678">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/code/class/ntec/ntec_db_operations.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="77" column="9" selection-start="1832" selection-end="1832" vertical-scroll-proportion="0.35505837">
+        <state line="77" column="9" selection-start="1832" selection-end="1832" vertical-scroll-proportion="0.08928572">
           <folding>
             <element signature="n#NtecConfigOption#0;n#!!top" expanded="false" />
             <element signature="e#478#624#0" expanded="false" />
@@ -616,32 +626,46 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://C:/Ruby200/lib/ruby/gems/2.0.0/gems/ruby-debug-ide-0.4.21/lib/ruby-debug-ide.rb">
+    <entry file="file://$PROJECT_DIR$/code/class/database/connect_to_oledb.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="86" column="0" selection-start="2049" selection-end="2049" vertical-scroll-proportion="0.33225808">
+        <state line="47" column="20" selection-start="925" selection-end="932" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/class/log/logme.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="17" column="52" selection-start="279" selection-end="299" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#20#154#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/class/database/connect_to_sqlite.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="46" column="20" selection-start="816" selection-end="816" vertical-scroll-proportion="0.6998012">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/code/class/run_queries.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="221" column="0" selection-start="6161" selection-end="6161" vertical-scroll-proportion="0.83548385">
+        <state line="106" column="15" selection-start="2400" selection-end="2400" vertical-scroll-proportion="0.16500995">
           <folding>
-            <element signature="e#440#646#0" expanded="false" />
-            <element signature="e#765#1192#1" expanded="false" />
-            <element signature="e#1275#2048#0" expanded="false" />
-            <element signature="e#2430#2571#0" expanded="false" />
-            <element signature="e#2455#2565#2" expanded="false" />
-            <element signature="e#2601#3110#0" expanded="false" />
-            <element signature="e#3150#3700#0" expanded="false" />
-            <element signature="e#3738#5163#0" expanded="false" />
-            <element signature="e#4338#5069#0" expanded="false" />
-            <element signature="e#4536#4734#0" expanded="false" />
-            <element signature="e#4741#5059#0" expanded="false" />
-            <element signature="e#5231#5577#0" expanded="false" />
-            <element signature="e#5378#5563#0" expanded="false" />
-            <element signature="e#5397#5555#1" expanded="false" />
-            <element signature="e#5581#5870#0" expanded="false" />
+            <element signature="e#512#761#0" expanded="false" />
+            <element signature="e#814#1939#0" expanded="false" />
+            <element signature="e#2047#2175#0" expanded="false" />
+            <element signature="e#2179#2399#0" expanded="false" />
+            <element signature="e#2435#2921#0" expanded="false" />
+            <element signature="e#2948#3942#0" expanded="false" />
+            <element signature="e#3992#4535#0" expanded="false" />
+            <element signature="e#4585#4726#0" expanded="false" />
+            <element signature="e#4756#5314#0" expanded="false" />
+            <element signature="e#5354#5890#0" expanded="false" />
+            <element signature="e#5928#7335#0" expanded="false" />
+            <element signature="e#7403#7749#0" expanded="false" />
+            <element signature="e#7753#8042#0" expanded="false" />
           </folding>
         </state>
       </provider>
