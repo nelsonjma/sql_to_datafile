@@ -65,6 +65,10 @@ class NtecOptions
 
             # process option
             if (unprocessed_option.to_s.index('],')) == nil
+
+              #removes [] if its just like this data=[[zczczxc]];
+              unprocessed_option = process_item_list(unprocessed_option)
+
               ntec_option.options.push(unprocessed_option.strip) # return just one item...
             else
               # split option list [A], [b], [C]

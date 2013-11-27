@@ -7,8 +7,9 @@ load 'class/ntec/ntec_db_operations.rb'
 load 'class/database/datatable.rb'
 load 'class/database/connect_to_oledb.rb'
 load 'class/database/connect_to_sqlite.rb'
-# datafile write
-load 'class/database/write_to_sqlite.rb'
+# write to
+load 'class/write_to/write_to_xml.rb'
+load 'class/write_to/write_to_sqlite.rb'
 # read xml files
 load 'class/xml/read_xml.rb'
 # logging
@@ -144,18 +145,23 @@ class StoreData
       datatable = option.datatable
       clean_data = option.clean_data
       drop_table = option.drop_table
+      xml_file = option.xml_file
 
       # log starting
       logging_store_msg(page, frame, 'starting')
 
-      if sql.count > 0 && sql.count == datatable.count && (conn.count == sql.count || conn.count == 1)
+      if sql.count == 1 && conn.count == 1 && xml_file != ''
+
+        process_option_xml_file(page, frame, conn[0], sql[0], xml_file, folder_path)
+
+      elsif sql.count > 0 && sql.count == datatable.count && (conn.count == sql.count || conn.count == 1)
         (0..sql.count-1).each { |i|
 
           aux_sql = sql[i]
           aux_conn = conn.count == 1 ? conn[0] : conn[i]
           aux_datatable = datatable[i]
 
-          process_option(page, frame, aux_conn, aux_sql, aux_datatable, datafile, clean_data, drop_table, folder_path)
+          process_option_datafile(page, frame, aux_conn, aux_sql, aux_datatable, datafile, clean_data, drop_table, folder_path)
         }
       end
 
@@ -166,7 +172,7 @@ class StoreData
   end
 
   # run query and then write data to datafile
-  def process_option(page, frame, conn, sql, datatable, datafile, clean_data, drop_table, folder_path)
+  def process_option_datafile(page, frame, conn, sql, datatable, datafile, clean_data, drop_table, folder_path)
     begin
       # log query start
       logging_store_msg(page, frame, 'query running:')
@@ -178,9 +184,28 @@ class StoreData
 
       write_to_datafile(data, datatable, datafile, clean_data, drop_table, folder_path)
 
+      # log write to datafile
+      logging_store_msg(page, frame, 'end datafile:')
+
+    rescue Exception => e
+      throw e.message
+    end
+  end
+
+  def process_option_xml_file(page, frame, conn, sql, xml_file, folder_path)
+    begin
+      # log query start
+      logging_store_msg(page, frame, 'query running:')
+
+      data = run_query(conn, sql)
+
+      # log write to xml
+      logging_store_msg(page, frame, 'write to xml:')
+
+      write_to_xml(data, xml_file, folder_path)
 
       # log write to datafile
-      logging_store_msg(page, frame, 'end:')
+      logging_store_msg(page, frame, 'end xml:')
 
     rescue Exception => e
       throw e.message
@@ -277,7 +302,24 @@ class StoreData
         write.change_name(datatable + '_tmp', datatable)
       end
     rescue Exception => e
-      throw 'writing: ' + e.message
+      throw 'datafile writing: ' + e.message
+    end
+  end
+
+  def write_to_xml(data, xml_file, folder_path)
+    begin
+      # add extension to datafile
+      xml_file = xml_file + '.db' unless xml_file.to_s.index('.xml')
+
+      # add folder to datafile name
+      xml_file = build_datafile_path(folder_path, xml_file)
+
+      # write to xml
+      xml = WriteToXml.new(xml_file, data.columns, data.rows)
+      xml.write
+
+    rescue Exception => e
+      throw 'xml_file writing: ' + e.message
     end
   end
 
@@ -296,22 +338,25 @@ class StoreData
     ''
   end
 
-  def build_datafile_path(folder_path, datafile)
+  def build_datafile_path(folder_path, filename)
 
     folder_path = @default_datafile_folder if folder_path.to_s.strip == '' || folder_path.to_s.strip.downcase == 'default'
 
-    folder_path.to_s.strip.end_with?('\\') ? folder_path.strip + datafile : folder_path.strip + '\\' + datafile
+    folder_path.to_s.strip.end_with?('\\') ? folder_path.strip + filename : folder_path.strip + '\\' + filename
   end
 
   private :build_datafile_path,
           :filter_sqlite_conn_str,
           :write_to_datafile,
+          :write_to_xml,
           :run_query,
           :read_config_file,
           :get_ntec_options,
-          :process_option,
+          :process_option_datafile,
+          :process_option_xml_file,
           :option_execution,
           :thread_wait_management,
           :logging_show_report,
           :logging_store_msg
+
 end

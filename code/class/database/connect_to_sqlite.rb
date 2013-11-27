@@ -3,6 +3,7 @@ require 'sqlite3'
 
 load 'class/database/datatable.rb'
 
+
 class ConnectToSqlite
   attr_accessor :conn
 

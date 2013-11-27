@@ -10,7 +10,7 @@ class NtecConfigOption
   # it will be one datatable for one sql => datatable_name => []
   attr_accessor :page, :folder_path, :frame,
                 :sql, :conn, :datafile, :datatable,
-                :clean_data, :drop_table
+                :clean_data, :drop_table, :xml_file
 
   def initialize
     @page = nil
@@ -20,6 +20,7 @@ class NtecConfigOption
     @conn =  []
     @datafile = nil
     @datatable = []
+    @xml_file = nil
   end
 
   # datatable can be equal to datafile if datafile not defined
@@ -90,11 +91,10 @@ class NtecConfigOptions
           ntec_op.datatable = op_decoded.get_all('datatable')
           ntec_op.sql = op_decoded.get_all('sql')
           ntec_op.conn = op_decoded.get_all('conn')
+          ntec_op.xml_file = op_decoded.get_first('xml_file')
 
           # add ntec to option list
-          if ntec_op.datafile != '' &&
-              ntec_op.sql.count > 0 &&
-              ntec_op.conn.count > 0
+          if ntec_op.sql.count > 0 && ntec_op.conn.count > 0 && ( ntec_op.datafile != '' || ntec_op.xml_file != '')
             @options.push(ntec_op)
           end
         end
