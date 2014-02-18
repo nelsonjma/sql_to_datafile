@@ -1,4 +1,15 @@
-load 'class/run_queries.rb'
+load File.dirname(__FILE__) + '/class/run_queries.rb'
 
-store = StoreData.new('C:\Users\xyon\Desktop\GitHub\sql_to_datafile\code\config.xml')
-store.options_execution
+
+# just run if you add arguments
+if ARGV.length >= 0
+  # to be used in tests
+  #store = StoreData.new('C:\Users\xoli169\Desktop\codigo\ruby\sql_to_datafile\config.xml')
+
+  # for production
+  store = StoreData.new(ARGV[0].to_s)
+  store.options_execution
+else
+  puts 'you need to add the database config file path'
+end
+

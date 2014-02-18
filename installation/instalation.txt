@@ -1,0 +1,27 @@
+Well there are two ways to use this:
+
+1º this is ruby if you have ruby installed and the following gems you are ready to go:
+
+	list of gems:
+		win32ole
+		sqlite3
+		nokogiri
+
+	sql_to_datafile.rb config.xml
+
+2º this is cool if you dont want to install ruby in your machine
+
+First get a machine with ruby, then install folowing gems win32ole, sqlite3, sqlite3, nokogiri and ocra. 
+
+The last gem (OCRA) is a "compiles" all the code and depencies in one file so that you dont need anything mode then that to work.
+
+class path list:
+	class/*.rb
+	class/database/*.rb 
+	class/log/*.rb 
+	class/ntec/*.rb 
+	class/write_to/*.rb 
+	class/xml/*.rb
+
+commands:
+	ocra sql_to_datafile.rb class/*.rb class/database/*.rb class/log/*.rb class/ntec/*.rb class/write_to/*.rb class/xml/*.rb  --icon buzz.ico

@@ -2,7 +2,7 @@ require 'rubygems'
 require 'sqlite3'
 
 #load 'ntec_options.rb' # run from the same folder
-load 'class/ntec/ntec_options.rb' # run from sql_to_datafile
+load File.dirname(__FILE__) + '/ntec_options.rb' # run from sql_to_datafile
 
 class NtecConfigOption
   # sql => [], conn => []

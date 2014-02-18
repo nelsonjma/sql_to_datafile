@@ -2,18 +2,18 @@ require 'rubygems'
 require 'thread'
 
 # get ntec configs
-load 'class/ntec/ntec_db_operations.rb'
+load File.dirname(__FILE__) + '/ntec/ntec_db_operations.rb'
 # database connection
-load 'class/database/datatable.rb'
-load 'class/database/connect_to_oledb.rb'
-load 'class/database/connect_to_sqlite.rb'
+load File.dirname(__FILE__) + '/database/datatable.rb'
+load File.dirname(__FILE__) + '/database/connect_to_oledb.rb'
+load File.dirname(__FILE__) + '/database/connect_to_sqlite.rb'
 # write to
-load 'class/write_to/write_to_xml.rb'
-load 'class/write_to/write_to_sqlite.rb'
+load File.dirname(__FILE__) + '/write_to/write_to_xml.rb'
+load File.dirname(__FILE__) + '/write_to/write_to_sqlite.rb'
 # read xml files
-load 'class/xml/read_xml.rb'
+load File.dirname(__FILE__) + '/xml/read_xml.rb'
 # logging
-load 'class/log/logme.rb'
+load File.dirname(__FILE__) + '/log/logme.rb'
 
 class StoreData
   attr_accessor :db_path, :schedule_time, :default_datafile_folder, :parallel_threads,
@@ -199,8 +199,8 @@ class StoreData
 
       data = run_query(conn, sql)
 
-      # log write to xml
-      logging_store_msg(page, frame, 'write to xml:')
+      # log write to xml, the condition is a warning to user so that he can control the load that the program takes
+      logging_store_msg(page, frame, data.rows.length <= 20000 ? 'write to xml:' : 'write > 20k rows to xml:')
 
       write_to_xml(data, xml_file, folder_path)
 
@@ -309,7 +309,7 @@ class StoreData
   def write_to_xml(data, xml_file, folder_path)
     begin
       # add extension to datafile
-      xml_file = xml_file + '.db' unless xml_file.to_s.index('.xml')
+      xml_file = xml_file + '.xml' unless xml_file.to_s.index('.xml')
 
       # add folder to datafile name
       xml_file = build_datafile_path(folder_path, xml_file)

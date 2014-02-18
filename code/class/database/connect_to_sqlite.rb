@@ -1,7 +1,7 @@
 require 'rubygems'
 require 'sqlite3'
 
-load 'class/database/datatable.rb'
+load File.dirname(__FILE__) + '/datatable.rb'
 
 
 class ConnectToSqlite

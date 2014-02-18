@@ -1,10 +1,8 @@
 require 'rubygems'
 require 'nokogiri'
 
-load 'class/database/connect_to_sqlite.rb'
-load 'class/database/datatable.rb'
-
-
+File.expand_path('../database/connect_to_sqlite', __FILE__)
+File.expand_path('../database/datatable', __FILE__)
 
 class WriteToXml
   attr_accessor :xml_file, :columns, :rows, :column_array
@@ -45,21 +43,32 @@ class WriteToXml
   def buid_row_array
     builder = Nokogiri::XML::Builder.new(:encoding => 'UTF-8') do |xml|
       xml.table {
-        @rows.each do |row|
+        #@rows.each do |row|
+        for i in 0..@rows.length
           xml.row {
             c=0
-            row.each do |cell|
-              value = cell
 
-              begin
-                value = cell[1] if cell.count == 2
+            if @rows[i] != nil
+
+              @rows[i].each do |cell|
+              #row.each do |cell|
+                value = cell
+
+                begin
+                  value = cell[1] if cell.count == 2
+                rescue
+                end
+
+                value = '' if value == nil
+
+                xml.send(column_array[c], value)
+
+                c = c + 1
               end
 
-              value = '' if value == nil
+              # clean row, this is necessary because of very large datasets
+              @rows[i] = nil
 
-              xml.send(column_array[c], value)
-
-              c = c + 1
             end
           }
         end
